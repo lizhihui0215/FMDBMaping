@@ -27,3 +27,6 @@ Pods/
 
 # Mac
 .DS_Store
+
+# AppCode
+.idea/
