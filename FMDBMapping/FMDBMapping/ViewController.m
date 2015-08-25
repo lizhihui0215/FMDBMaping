@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+
+
+
 #import "User.h"
 @interface ViewController ()
 
@@ -18,11 +21,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    User *user = [User entityWithTableName:@"user"];
+    User *user = [[User alloc] init];
     user.name = @"aaa";
     user.age = 10;
-    user.favourites = @[@"1",@"2"];
+    user.isBoy = NO;
+    user.data = [@"abcsadasdsadasda" dataUsingEncoding:NSUTF8StringEncoding];
+    user.date = [NSDate date];
+    
     [user save];
+    
+    
     
     
 }

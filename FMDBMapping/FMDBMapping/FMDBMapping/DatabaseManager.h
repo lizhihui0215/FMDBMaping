@@ -77,39 +77,3 @@ typedef NS_ENUM(NSInteger, FieldType){
 
 @end
 
-/*!
- *  DBField object is a easy way to create a table fields
- */
-@interface DBField : NSObject
-
-/*! table field name */
-@property (nonatomic, strong, readonly) NSString *fieldName;
-
-/*!  the type of the field */
-@property (nonatomic, assign, readonly) FieldType type;
-
-/*!  default value of the field */
-@property (nonatomic, strong, readonly) id defaultValue;
-
-/*!
- *  create a DBField use specified name with type
- *
- *  @param fieldName field name
- *  @param type      field type
- *  @param defaultValue field default value
- *
- *  @return DBField
- */
-- (instancetype)initWithName:(NSString *)fieldName type:(FieldType)type defaultValue:(id)defaultValue;
-
-/*!
- *  create a DBField use specified name with type
- *
- *  @param fieldName field name
- *  @param type      field type
- *  @param defaultValue field default value
- *
- *  @return DBField
- */
-+ (instancetype)fieldWithName:(NSString *)fieldName type:(FieldType)type defaultValue:(id)defaultValue;
-@end

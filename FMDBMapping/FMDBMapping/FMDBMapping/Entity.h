@@ -6,16 +6,19 @@
 //  Copyright © 2015 lizhihui. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseEntity.h"
 @protocol test <NSObject>
 
 @end
-@interface Entity : NSObject
+@interface Entity : BaseEntity
 @property (nonatomic, strong) NSString *tableName;
 
-- (instancetype)initWithTableName:(NSString *)tableName;
 
 - (void)save;
+
++ (NSArray *)ignoreProperties;
+
++ (NSArray *)indexedProperties;
 
 + (instancetype)entityWithTableName:(NSString *)tableName;
 

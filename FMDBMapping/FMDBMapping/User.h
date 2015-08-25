@@ -11,6 +11,11 @@
 @interface User : Entity
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) NSInteger age;
-@property (nonatomic, strong) NSArray *favourites;
+@property (nonatomic, assign) BOOL isBoy;
+@property (nonatomic, strong) NSData *data;
+@property (nonatomic, strong) NSDate *date;
+
+
+
 
 @end
