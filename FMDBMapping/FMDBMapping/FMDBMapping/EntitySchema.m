@@ -8,7 +8,6 @@
 
 #import "EntitySchema.h"
 #import "DynamicEntity.h"
-#import "BaseEntity.h"
 #import "Entity.h"
 #import "EntityProperty.h"
 #import <objc/runtime.h>
@@ -27,16 +26,15 @@
     // create array of properties, inserting properties of  superclasses first
     
     Class cls = entityClass;
-    Class superClass = class_getSuperclass(cls);
+    
     
     NSArray *properties = @[];
     
     
-    while (superClass && superClass != [BaseEntity class]) {
+    while (cls != [Entity class]) {
         properties = [EntitySchema propertiesForClass:cls];
         
-        cls = superClass;
-        superClass = class_getSuperclass(superClass);
+        cls = [cls superclass];
     }
     schema.properties = properties;
     

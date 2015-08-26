@@ -7,7 +7,7 @@
 //
 
 #import "Schema.h"
-#import "BaseEntity.h"
+#import "Entity.h"
 #import "EntitySchema.h"
 #import <objc/runtime.h>
 static Schema *s_sharedSchema;
@@ -55,7 +55,7 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     
     for (unsigned int i = 0 ; i < numClasses; i++) {
         Class cls = classes[i];
-        Class objectBaseClass = [BaseEntity class];
+        Class objectBaseClass = [Entity class];
         if (!ZHIsKindOfClass(cls, objectBaseClass)){
             // ingore all other class
             continue;
@@ -67,8 +67,6 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
                                            reason:message
                                          userInfo:nil];
         }
-        
-        
         
         s_localNameToClass[className] = cls;
     }
@@ -82,12 +80,9 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
         class_replaceMethod(metaClass, @selector(sharedSchema), imp, "@:");
     }
     
-    
-    
     s_sharedSchema = schema;
     
     NSLog(@"s_localNameToClass %@",s_localNameToClass);
-    
 }
 
 

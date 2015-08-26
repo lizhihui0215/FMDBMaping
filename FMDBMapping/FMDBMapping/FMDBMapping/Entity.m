@@ -15,10 +15,24 @@
 #import "EntitySchema.h"
 #import "Schema.h"
 static EntityValueTransformer * valueTransformer = nil;
-
+@interface Entity ()
+@property (nonatomic, strong, readwrite) EntitySchema *schema;
+@end
 @implementation Entity
 {
-    EntitySchema *_entitySchema;
+    
+}
+
++ (NSArray *)ignoreProperties{
+    return nil;
+}
+
++ (NSArray *)indexedProperties{
+    return @[];
+}
+
++ (NSArray *)optionalPropertyNames{
+    return nil;
 }
 
 + (EntitySchema *)sharedSchema{
@@ -30,8 +44,8 @@ static EntityValueTransformer * valueTransformer = nil;
 {
     self = [super init];
     if (self && [Schema sharedSchema]) {
-        _entitySchema = [[self class] sharedSchema];
-        NSLog(@"_entitySchema %@",_entitySchema);
+        self.schema = [[self class] sharedSchema];
+        NSLog(@"_entitySchema %@",self.schema);
     }
     return self;
 }
@@ -51,30 +65,6 @@ static EntityValueTransformer * valueTransformer = nil;
     
     
 }
-
-
-
-- (void)select{
-    
-}
-
-- (void)delete{
-    
-}
-
-- (void)update{
-    
-}
-
-- (void)save{
-    
-
-    
-    
-}
-
-
-
 
 @end
 

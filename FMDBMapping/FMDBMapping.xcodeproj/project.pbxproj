@@ -13,7 +13,6 @@
 		26E090D91B8C3B1700FF70C9 /* ZHDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090D81B8C3B1700FF70C9 /* ZHDBManager.m */; };
 		26E090DF1B8C476B00FF70C9 /* EntitySchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090DE1B8C476B00FF70C9 /* EntitySchema.m */; };
 		26E090E21B8C47B100FF70C9 /* Schema.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090E11B8C47B100FF70C9 /* Schema.m */; };
-		26E090E51B8C47E500FF70C9 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090E41B8C47E500FF70C9 /* BaseEntity.m */; };
 		26EA33A01B8707EC004BF293 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EA339D1B8707EC004BF293 /* FileManager.m */; };
 		26EA33A11B8707EC004BF293 /* GBSCommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EA339F1B8707EC004BF293 /* GBSCommonTools.m */; };
 		26EA33A41B870B18004BF293 /* EntityProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EA33A31B870B18004BF293 /* EntityProperty.m */; };
@@ -25,6 +24,7 @@
 		26EB95461B87036B00174E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EB95451B87036B00174E36 /* Images.xcassets */; };
 		26EB95491B87036B00174E36 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26EB95471B87036B00174E36 /* LaunchScreen.xib */; };
 		26EB95551B87036B00174E36 /* FMDBMappingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 26EB95541B87036B00174E36 /* FMDBMappingTests.m */; };
+		26ECC8191B8E025800D8D39C /* ZHGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECC8181B8E025800D8D39C /* ZHGlobalManager.m */; };
 		5B875C3F18EF5EC5032DC34C /* DynamicEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B875A84FA4A2B5AC5D31AF6 /* DynamicEntity.m */; };
 		5B875FF7B08CC402886720E2 /* DBField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B875C42E48E3A76AE3FFDA3 /* DBField.m */; };
 		E3E70F1615DD52E3014B8901 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4821D4BD7E4C9C1782629864 /* libPods.a */; };
@@ -54,8 +54,6 @@
 		26E090DE1B8C476B00FF70C9 /* EntitySchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySchema.m; sourceTree = "<group>"; };
 		26E090E01B8C47B100FF70C9 /* Schema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schema.h; sourceTree = "<group>"; };
 		26E090E11B8C47B100FF70C9 /* Schema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schema.m; sourceTree = "<group>"; };
-		26E090E31B8C47E500FF70C9 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
-		26E090E41B8C47E500FF70C9 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		26E090E61B8C5FC500FF70C9 /* ZHConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHConstants.h; sourceTree = "<group>"; };
 		26E755BF1B8DC6B800017525 /* EntityProperty_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityProperty_Private.h; sourceTree = "<group>"; };
 		26EA339C1B8707EC004BF293 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
@@ -79,6 +77,8 @@
 		26EB954E1B87036B00174E36 /* FMDBMappingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FMDBMappingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EB95531B87036B00174E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26EB95541B87036B00174E36 /* FMDBMappingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDBMappingTests.m; sourceTree = "<group>"; };
+		26ECC8171B8E025800D8D39C /* ZHGlobalManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHGlobalManager.h; sourceTree = "<group>"; };
+		26ECC8181B8E025800D8D39C /* ZHGlobalManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHGlobalManager.m; sourceTree = "<group>"; };
 		4821D4BD7E4C9C1782629864 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B87556955FEE84ACFE3E83B /* DBField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBField.h; sourceTree = "<group>"; };
 		5B875A84FA4A2B5AC5D31AF6 /* DynamicEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicEntity.m; sourceTree = "<group>"; };
@@ -181,8 +181,6 @@
 				2633DF6C1B8706FE0018CA67 /* DatabaseManager.m */,
 				26E090E01B8C47B100FF70C9 /* Schema.h */,
 				26E090E11B8C47B100FF70C9 /* Schema.m */,
-				26E090E31B8C47E500FF70C9 /* BaseEntity.h */,
-				26E090E41B8C47E500FF70C9 /* BaseEntity.m */,
 				2633DF651B8704A20018CA67 /* Entity.h */,
 				2633DF661B8704A20018CA67 /* Entity.m */,
 				26E090DD1B8C476B00FF70C9 /* EntitySchema.h */,
@@ -199,6 +197,8 @@
 				5B875A84FA4A2B5AC5D31AF6 /* DynamicEntity.m */,
 				5B875ED804FF553F61F15DB8 /* DynamicEntity.h */,
 				26E090E61B8C5FC500FF70C9 /* ZHConstants.h */,
+				26ECC8171B8E025800D8D39C /* ZHGlobalManager.h */,
+				26ECC8181B8E025800D8D39C /* ZHGlobalManager.m */,
 			);
 			path = FMDBMapping;
 			sourceTree = "<group>";
@@ -356,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				26EA33A71B872208004BF293 /* EntityValueTransformer.m in Sources */,
-				26E090E51B8C47E500FF70C9 /* BaseEntity.m in Sources */,
 				2633DF6A1B8705AB0018CA67 /* Person.m in Sources */,
 				26EA33A11B8707EC004BF293 /* GBSCommonTools.m in Sources */,
 				2633DF671B8704A20018CA67 /* Entity.m in Sources */,
@@ -366,6 +365,7 @@
 				2633DF6D1B8706FE0018CA67 /* DatabaseManager.m in Sources */,
 				26EA33A01B8707EC004BF293 /* FileManager.m in Sources */,
 				26EB953B1B87036B00174E36 /* main.m in Sources */,
+				26ECC8191B8E025800D8D39C /* ZHGlobalManager.m in Sources */,
 				5B875FF7B08CC402886720E2 /* DBField.m in Sources */,
 				26E090D91B8C3B1700FF70C9 /* ZHDBManager.m in Sources */,
 				26E090E21B8C47B100FF70C9 /* Schema.m in Sources */,

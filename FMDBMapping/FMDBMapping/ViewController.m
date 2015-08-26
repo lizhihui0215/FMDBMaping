@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-
+#import "ZHGlobalManager.h"
 
 #import "Person.h"
 @interface ViewController ()
@@ -31,10 +31,12 @@
     
     
     
-    
+    NSLog(@"dog %@",dog);
 
 
+    ZHGlobalManager *manager = [ZHGlobalManager defaultManager];
     
+    [manager addEntity:person];
     
     
     
