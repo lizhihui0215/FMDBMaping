@@ -12,14 +12,26 @@
 #import <objc/message.h>
 #import "EntityProperty.h"
 #import "EntityValueTransformer.h"
+#import "EntitySchema.h"
+#import "Schema.h"
 static EntityValueTransformer * valueTransformer = nil;
 
 @implementation Entity
+{
+    EntitySchema *_entitySchema;
+}
+
++ (EntitySchema *)sharedSchema{
+    
+    return nil;
+}
+
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
-        
+    if (self && [Schema sharedSchema]) {
+        _entitySchema = [[self class] sharedSchema];
+        NSLog(@"_entitySchema %@",_entitySchema);
     }
     return self;
 }
@@ -61,13 +73,7 @@ static EntityValueTransformer * valueTransformer = nil;
     
 }
 
-+ (NSArray *)ignoreProperties{
-    return nil;
-}
 
-+ (NSArray *)indexedProperties{
-    return @[];
-}
 
 
 @end

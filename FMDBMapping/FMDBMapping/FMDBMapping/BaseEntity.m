@@ -21,4 +21,16 @@
     }
     return self;
 }
+
++ (NSArray *)ignoreProperties{
+    return nil;
+}
+
++ (NSArray *)indexedProperties{
+    return @[];
+}
+
++ (NSArray *)optionalPropertyNames{
+    return nil;
+}
 @end

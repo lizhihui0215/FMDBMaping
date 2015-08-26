@@ -8,23 +8,13 @@
 
 #import "EntityProperty.h"
 #import "Schema.h"
-@interface EntityProperty()
-
-@property (nonatomic, readwrite, nonnull) NSString *name;
-@property (nonatomic, readwrite) ZHPropertyType type;
-@property (nonatomic, readwrite) BOOL indexed;
-@property (nonatomic, readwrite, copy, nullable) NSString *entityClassName;
-@property (nonatomic, readwrite) BOOL optional;
-@end
+#import "EntityProperty_Private.h"
 
 
 @implementation EntityProperty{
     NSString *_objcRawType;
 }
 - (BOOL)isEqualToProperty:(EntityProperty *)other {
-    
-    
-    
     return self.type == other.type &&
         self.indexed == other.indexed &&
         self.isPrimary == other.isPrimary &&

@@ -16,11 +16,8 @@
 
 - (void)save;
 
-+ (NSArray *)ignoreProperties;
 
-+ (NSArray *)indexedProperties;
 
-+ (instancetype)entityWithTableName:(NSString *)tableName;
 
 
 @end

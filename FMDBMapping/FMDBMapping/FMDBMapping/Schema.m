@@ -20,8 +20,22 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     return NO;
 }
 
+@interface Schema()
+@property (nonatomic, readwrite) NSMutableDictionary *entitySchemaByName;
+@end
+
 @implementation Schema
 
+- (void)setObjectSchema:(NSArray *)objectSchema{
+    _objectSchema = objectSchema;
+    _entitySchemaByName = [NSMutableDictionary dictionaryWithCapacity:objectSchema.count];
+    for (EntitySchema *entity in objectSchema) {
+        [_entitySchemaByName setObject:entity forKey:entity.className];
+    }
+}
+
+
+    
 
 + (void)initialize{
     static BOOL initialized;
@@ -53,19 +67,29 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
                                            reason:message
                                          userInfo:nil];
         }
-       
+        
+        
+        
         s_localNameToClass[className] = cls;
     }
     
     // process all Entity subclasses
     for (Class cls in s_localNameToClass.allValues) {
         EntitySchema *schema = [EntitySchema schemaForEntityClass:cls];
+        [schemaArray addObject:schema];
+        Class metaClass = objc_getMetaClass(class_getName(cls));
+        IMP imp = imp_implementationWithBlock(^{return schema ;});
+        class_replaceMethod(metaClass, @selector(sharedSchema), imp, "@:");
     }
     
+    
+    
+    s_sharedSchema = schema;
     
     NSLog(@"s_localNameToClass %@",s_localNameToClass);
     
 }
+
 
 
 

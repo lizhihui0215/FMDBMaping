@@ -10,7 +10,7 @@
 
 
 
-#import "User.h"
+#import "Person.h"
 @interface ViewController ()
 
 @end
@@ -21,14 +21,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    User *user = [[User alloc] init];
-    user.name = @"aaa";
-    user.age = 10;
-    user.isBoy = NO;
-    user.data = [@"abcsadasdsadasda" dataUsingEncoding:NSUTF8StringEncoding];
-    user.date = [NSDate date];
+    Dog *dog = [[Dog alloc] init];
     
-    [user save];
+    Person *person = [[Person alloc] init];
+    person.name = @"name";
+    person.birthday = [NSDate date];
+    dog.person = person;
+    dog.name = @"haha";
+    
+    
+    
+    
+
+
     
     
     

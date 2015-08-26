@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2633DF671B8704A20018CA67 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF661B8704A20018CA67 /* Entity.m */; };
-		2633DF6A1B8705AB0018CA67 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF691B8705AB0018CA67 /* User.m */; };
+		2633DF6A1B8705AB0018CA67 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF691B8705AB0018CA67 /* Person.m */; };
 		2633DF6D1B8706FE0018CA67 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF6C1B8706FE0018CA67 /* DatabaseManager.m */; };
 		26E090D91B8C3B1700FF70C9 /* ZHDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090D81B8C3B1700FF70C9 /* ZHDBManager.m */; };
 		26E090DF1B8C476B00FF70C9 /* EntitySchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090DE1B8C476B00FF70C9 /* EntitySchema.m */; };
@@ -44,8 +44,8 @@
 		06FCAD5ED4AABDAED2156D6A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2633DF651B8704A20018CA67 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		2633DF661B8704A20018CA67 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
-		2633DF681B8705AB0018CA67 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		2633DF691B8705AB0018CA67 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		2633DF681B8705AB0018CA67 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		2633DF691B8705AB0018CA67 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		2633DF6B1B8706FE0018CA67 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2633DF6C1B8706FE0018CA67 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
 		26E090D71B8C3B1700FF70C9 /* ZHDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHDBManager.h; sourceTree = "<group>"; };
@@ -57,6 +57,7 @@
 		26E090E31B8C47E500FF70C9 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		26E090E41B8C47E500FF70C9 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		26E090E61B8C5FC500FF70C9 /* ZHConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHConstants.h; sourceTree = "<group>"; };
+		26E755BF1B8DC6B800017525 /* EntityProperty_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityProperty_Private.h; sourceTree = "<group>"; };
 		26EA339C1B8707EC004BF293 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		26EA339D1B8707EC004BF293 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		26EA339E1B8707EC004BF293 /* GBSCommonTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSCommonTools.h; sourceTree = "<group>"; };
@@ -132,8 +133,8 @@
 				26EB953D1B87036B00174E36 /* AppDelegate.m */,
 				26EB953F1B87036B00174E36 /* ViewController.h */,
 				26EB95401B87036B00174E36 /* ViewController.m */,
-				2633DF681B8705AB0018CA67 /* User.h */,
-				2633DF691B8705AB0018CA67 /* User.m */,
+				2633DF681B8705AB0018CA67 /* Person.h */,
+				2633DF691B8705AB0018CA67 /* Person.m */,
 				26EB95421B87036B00174E36 /* Main.storyboard */,
 				26EB95451B87036B00174E36 /* Images.xcassets */,
 				26EB95471B87036B00174E36 /* LaunchScreen.xib */,
@@ -190,6 +191,7 @@
 				26EA33A61B872208004BF293 /* EntityValueTransformer.m */,
 				26EA33A21B870B18004BF293 /* EntityProperty.h */,
 				26EA33A31B870B18004BF293 /* EntityProperty.m */,
+				26E755BF1B8DC6B800017525 /* EntityProperty_Private.h */,
 				5B87556955FEE84ACFE3E83B /* DBField.h */,
 				5B875C42E48E3A76AE3FFDA3 /* DBField.m */,
 				26E090D71B8C3B1700FF70C9 /* ZHDBManager.h */,
@@ -355,7 +357,7 @@
 			files = (
 				26EA33A71B872208004BF293 /* EntityValueTransformer.m in Sources */,
 				26E090E51B8C47E500FF70C9 /* BaseEntity.m in Sources */,
-				2633DF6A1B8705AB0018CA67 /* User.m in Sources */,
+				2633DF6A1B8705AB0018CA67 /* Person.m in Sources */,
 				26EA33A11B8707EC004BF293 /* GBSCommonTools.m in Sources */,
 				2633DF671B8704A20018CA67 /* Entity.m in Sources */,
 				26EB95411B87036B00174E36 /* ViewController.m in Sources */,

@@ -6,8 +6,11 @@
 //  Copyright © 2015 lizhihui. All rights reserved.
 //
 
-#import "User.h"
+#import "Person.h"
 
-@implementation User
+@implementation Dog
+
+@end
+@implementation Person
 
 @end

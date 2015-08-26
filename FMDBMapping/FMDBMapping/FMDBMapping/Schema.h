@@ -10,7 +10,7 @@
 
 @interface Schema : NSObject
 + (instancetype)sharedSchema;
-
+@property (nonatomic, readwrite, copy) NSArray *objectSchema;
 
 + (Class)classForString:(NSString *)className;
 @end

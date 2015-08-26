@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface BaseEntity : NSObject
++ (NSArray *)ignoreProperties;
 
++ (NSArray *)indexedProperties;
++ (NSArray *)optionalPropertyNames;
 @end

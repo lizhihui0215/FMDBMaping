@@ -12,7 +12,7 @@
 #import "Entity.h"
 #import "EntityProperty.h"
 #import <objc/runtime.h>
-
+#import "EntityProperty_Private.h"
 @implementation EntitySchema
 
 + (EntitySchema *)schemaForEntityClass:(Class)entityClass {
@@ -40,17 +40,7 @@
     }
     schema.properties = properties;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    return nil;
+    return schema;
 }
 
 + (NSArray *)propertiesForClass:(Class)entityClass {
@@ -78,21 +68,27 @@
         EntityProperty *property = [[EntityProperty alloc] initWithName:propertyName
                                                                 indexed:[indexed containsObject:propertyName]
                                                                property:properties[i]];
-        
-        
-        
-        
-        
-        
-        
+        [propertyArray addObject:property];
     }
     
-    
-    
+    for (NSArray *optionalProperties in [entityClass optionalPropertyNames]) {
+        for (EntityProperty *property in propertyArray) {
+            property.optional = [optionalProperties containsObject:property.name];
+        }
+    }
     
     free(properties);
     
     
-    return nil;
+    return propertyArray;
 }
+
+- (NSString *)description {
+    NSMutableString *propertiesString = [NSMutableString string];
+    for (EntityProperty *property in self.properties) {
+        [propertiesString appendFormat:@"\t%@\n", [property.description stringByReplacingOccurrencesOfString:@"\n" withString:@"\n\t"]];
+    }
+    return [NSString stringWithFormat:@"%@ {\n%@}", self.className, propertiesString];
+}
+
 @end
