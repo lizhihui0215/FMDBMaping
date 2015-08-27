@@ -34,9 +34,6 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     }
 }
 
-
-    
-
 + (void)initialize{
     static BOOL initialized;
     if (initialized) return;
@@ -75,9 +72,17 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     for (Class cls in s_localNameToClass.allValues) {
         EntitySchema *schema = [EntitySchema schemaForEntityClass:cls];
         [schemaArray addObject:schema];
+        
+        // exchange the sharedSchema at the runtime
         Class metaClass = objc_getMetaClass(class_getName(cls));
         IMP imp = imp_implementationWithBlock(^{return schema ;});
         class_replaceMethod(metaClass, @selector(sharedSchema), imp, "@:");
+        
+        // add accesstor
+        
+        
+        
+        
     }
     
     s_sharedSchema = schema;
@@ -85,7 +90,17 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     NSLog(@"s_localNameToClass %@",s_localNameToClass);
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    Schema *copy = [[[self class] allocWithZone:zone] init];
 
+    if (copy != nil) {
+        copy.objectSchema = [[NSArray allocWithZone:zone] initWithArray:self.objectSchema copyItems:YES];
+        
+        copy.entitySchemaByName = [[NSMutableDictionary allocWithZone:zone] initWithDictionary:self.entitySchemaByName copyItems:YES];;
+    }
+
+    return copy;
+}
 
 
 + (instancetype)sharedSchema{

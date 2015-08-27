@@ -21,4 +21,6 @@
 + (EntitySchema *)schemaForEntityClass:(Class)pClass;
 
 + (NSArray *)propertiesForClass:(Class)entityClass;
+
+
 @end

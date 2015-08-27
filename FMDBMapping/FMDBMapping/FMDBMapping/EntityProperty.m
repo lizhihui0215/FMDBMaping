@@ -8,8 +8,9 @@
 
 #import "EntityProperty.h"
 #import "Schema.h"
+#import "Entity.h"
 #import "EntityProperty_Private.h"
-
+#import "ZHArray.h"
 
 @implementation EntityProperty{
     NSString *_objcRawType;
@@ -53,7 +54,7 @@
 }
 
 - (void)updateAccessors {
-
+    
 }
 - (void)setObjcCodeFromType{
     switch (self.type) {
@@ -82,6 +83,38 @@
 
 }
 
+- (IMP) accessorGetterWith:(EntityProperty *)p
+                      code:(ZHPropertyType)code
+                 className:(NSString *)className{
+    if (code == ZHPropertyTypeArray) {
+        NSString *propName = p.name;
+        
+        return imp_implementationWithBlock(^(Entity *entity){
+            
+            // getter the property
+            typedef id (*getter_type)(Entity *, SEL);
+            getter_type getter = (getter_type)[[self class] instanceMethodForSelector:p.getterSel];
+            id val = getter(entity,p.getterSel);
+            if (!val){
+                val = [[ZHArray alloc] init];
+                // setter the property
+                typedef void (*setter_type)(Entity *, SEL, ZHArray *ar);
+                
+                setter_type setter = (setter_type)[[self class] instanceMethodForSelector:p.setterSel];
+                setter(entity,p.setterSel,val);
+                
+            }
+            
+        });
+        
+        
+        
+    }
+    
+    return nil;
+    
+}
+
 - (BOOL)setTypeFromRawType {
     const char *code = _objcRawType.UTF8String;
     self.objcType = *code;
@@ -92,16 +125,17 @@
         case 'l': // long
         case 'q': // long long
             self.type = ZHPropertyTypeInt;
-            break;
+            return YES;
         case 'f': // float
             self.type = ZHPropertyTypeFloat;
-            break;
+            return YES;
         case 'd': // double
             self.type = ZHPropertyTypeDouble;
-            break;
+            return YES;
         case 'c':
         case 'B': // BOOL
             self.type = ZHPropertyTypeBool;
+            return YES;
         case '@':{
             static const char arrayPrefix[] = "@\"ZHArray<";
             static const int arrayPrefixLen = sizeof(arrayPrefix) - 1;
@@ -150,7 +184,6 @@
             return NO;
             break;
     }
-    return NO;
 }
 
 - (BOOL)parseEntityProperty:(objc_property_t)property {

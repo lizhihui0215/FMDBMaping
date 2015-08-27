@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ZHGlobalManager.h"
+#import "ZHArray.h"
 @class EntitySchema;
 
 @interface Entity : NSObject
+@property (nonatomic, strong, readwrite) ZHGlobalManager *manager;
 @property (nonatomic, strong, readonly) EntitySchema *schema;
 
 + (NSArray *)ignoreProperties;
@@ -20,4 +22,8 @@
 + (NSArray *)optionalPropertyNames;
 
 + (EntitySchema *)sharedSchema;
+
+- (NSString *)tableName;
+
+- (NSDictionary *)sqlMappingField;
 @end

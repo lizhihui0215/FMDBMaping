@@ -117,7 +117,7 @@ static NSString * const DefaultDBName = @"DB.sqlite";
         
         // generate a sql with components
         // after first component is `create table tablename`
-        NSMutableString *sql = [NSMutableString stringWithFormat:@"create table %@",tableName];
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"create table if not exists %@",tableName];
         
         // after second component is `create table tablename (field1 fieldType default defaultValue,field2 fieldType default defaultValue,field3 fieldType default defaultValue,...)`
         for (DBField *field in fields) {

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Schema : NSObject
+@interface Schema : NSObject <NSCopying>
 + (instancetype)sharedSchema;
 @property (nonatomic, readwrite, copy) NSArray *objectSchema;
 
 + (Class)classForString:(NSString *)className;
+
+- (id)copyWithZone:(NSZone *)zone;
 @end

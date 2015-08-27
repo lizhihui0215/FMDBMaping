@@ -14,3 +14,9 @@
 @implementation Person
 
 @end
+
+@implementation Child
+
+
+
+@end

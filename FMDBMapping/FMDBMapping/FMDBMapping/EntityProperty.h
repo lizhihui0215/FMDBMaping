@@ -12,7 +12,7 @@
 
 
 
-@interface EntityProperty : NSObject
+@interface EntityProperty : NSObject 
 @property (nonatomic, readonly, nonnull) NSString *name;
 @property (nonatomic, readonly) ZHPropertyType type;
 

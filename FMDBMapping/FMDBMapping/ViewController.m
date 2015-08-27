@@ -26,9 +26,14 @@
     Person *person = [[Person alloc] init];
     person.name = @"name";
     person.birthday = [NSDate date];
-    dog.person = person;
-    dog.name = @"haha";
+    person.age = 18;
+    person.isMan = NO;
+    person.dogs = @[dog];
     
+    Child *chid = [[Child alloc] init];
+    chid.name = @"chid";
+    chid.toys = @"a ,b ,b";
+    person.chind = chid;
     
     
     NSLog(@"dog %@",dog);

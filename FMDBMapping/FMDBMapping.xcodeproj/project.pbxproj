@@ -10,6 +10,7 @@
 		2633DF671B8704A20018CA67 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF661B8704A20018CA67 /* Entity.m */; };
 		2633DF6A1B8705AB0018CA67 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF691B8705AB0018CA67 /* Person.m */; };
 		2633DF6D1B8706FE0018CA67 /* DatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2633DF6C1B8706FE0018CA67 /* DatabaseManager.m */; };
+		26DFD79F1B8EB7A4001F45D5 /* ZHArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DFD79E1B8EB7A4001F45D5 /* ZHArray.m */; };
 		26E090D91B8C3B1700FF70C9 /* ZHDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090D81B8C3B1700FF70C9 /* ZHDBManager.m */; };
 		26E090DF1B8C476B00FF70C9 /* EntitySchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090DE1B8C476B00FF70C9 /* EntitySchema.m */; };
 		26E090E21B8C47B100FF70C9 /* Schema.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E090E11B8C47B100FF70C9 /* Schema.m */; };
@@ -48,6 +49,8 @@
 		2633DF691B8705AB0018CA67 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		2633DF6B1B8706FE0018CA67 /* DatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseManager.h; sourceTree = "<group>"; };
 		2633DF6C1B8706FE0018CA67 /* DatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseManager.m; sourceTree = "<group>"; };
+		26DFD79D1B8EB7A4001F45D5 /* ZHArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHArray.h; sourceTree = "<group>"; };
+		26DFD79E1B8EB7A4001F45D5 /* ZHArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHArray.m; sourceTree = "<group>"; };
 		26E090D71B8C3B1700FF70C9 /* ZHDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHDBManager.h; sourceTree = "<group>"; };
 		26E090D81B8C3B1700FF70C9 /* ZHDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHDBManager.m; sourceTree = "<group>"; };
 		26E090DD1B8C476B00FF70C9 /* EntitySchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySchema.h; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				26EA33A61B872208004BF293 /* EntityValueTransformer.m */,
 				26EA33A21B870B18004BF293 /* EntityProperty.h */,
 				26EA33A31B870B18004BF293 /* EntityProperty.m */,
+				26DFD79D1B8EB7A4001F45D5 /* ZHArray.h */,
+				26DFD79E1B8EB7A4001F45D5 /* ZHArray.m */,
 				26E755BF1B8DC6B800017525 /* EntityProperty_Private.h */,
 				5B87556955FEE84ACFE3E83B /* DBField.h */,
 				5B875C42E48E3A76AE3FFDA3 /* DBField.m */,
@@ -371,6 +376,7 @@
 				26E090E21B8C47B100FF70C9 /* Schema.m in Sources */,
 				26E090DF1B8C476B00FF70C9 /* EntitySchema.m in Sources */,
 				5B875C3F18EF5EC5032DC34C /* DynamicEntity.m in Sources */,
+				26DFD79F1B8EB7A4001F45D5 /* ZHArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
