@@ -28,7 +28,8 @@
     person.birthday = [NSDate date];
     person.age = 18;
     person.isMan = NO;
-    person.dogs = @[dog];
+    id a = person.dogs ;
+    NSInteger b = person.age;
     
     Child *chid = [[Child alloc] init];
     chid.name = @"chid";

@@ -38,7 +38,44 @@
     }
     schema.properties = properties;
     
+    
     return schema;
+}
+
++ (void)replaceAccessorsClass:(Class)class property:(EntityProperty *)property{
+    
+}
+
++ (IMP) accessorGetterWith:(EntityProperty *)p
+                      class:(Class)class{
+    if (p.type == ZHPropertyTypeArray) {
+        NSString *propName = p.name;
+        
+        return imp_implementationWithBlock(^(Entity *entity){
+            
+            NSLog(@"-----aaa----");
+//            // getter the property
+//            typedef id (*getter_type)(Entity *, SEL);
+//            getter_type getter = (getter_type)[class instanceMethodForSelector:p.getterSel];
+//            id val = getter(entity,p.getterSel);
+//            if (!val){
+//                val = [[ZHArray alloc] init];
+//                // setter the property
+//                typedef void (*setter_type)(Entity *, SEL, ZHArray *ar);
+//                
+//                setter_type setter = (setter_type)[class instanceMethodForSelector:p.setterSel];
+//                setter(entity,p.setterSel,val);
+//                
+//            }
+            
+        });
+        
+        
+        
+    }
+    
+    return nil;
+    
 }
 
 + (NSArray *)propertiesForClass:(Class)entityClass {
@@ -54,6 +91,19 @@
     
     NSSet *indexed = [[NSSet alloc] initWithArray:[entityClass indexedProperties]];
     
+    NSString *className = NSStringFromClass(entityClass);
+    NSString *accessorClassName = [@"xxx" stringByAppendingString:className];
+    
+    Class accClass = objc_getClass(accessorClassName.UTF8String);
+    
+    if (!accClass){
+        
+        
+        accClass = objc_allocateClassPair(entityClass, accessorClassName.UTF8String, 0);
+        objc_registerClassPair(accClass);
+    }
+    
+
     
     
     for (unsigned int i = 0; i < count; i++) {
@@ -66,6 +116,21 @@
         EntityProperty *property = [[EntityProperty alloc] initWithName:propertyName
                                                                 indexed:[indexed containsObject:propertyName]
                                                                property:properties[i]];
+        
+        IMP getterImp = [self accessorGetterWith:property
+                                           class:entityClass];
+        
+        IMP aa = imp_implementationWithBlock(^(id obj){
+            NSLog(@"aaa");
+            return obj;
+        });
+        if (aa){
+            
+            class_replaceMethod([accClass superclass], property.getterSel, aa, "@:@");
+//            class_replaceMethod(entityClass, property.getterSel, aa, "@:@");
+            
+        }
+        
         [propertyArray addObject:property];
     }
     

@@ -50,12 +50,20 @@
     // update getter/setter names
     [self updateAccessors];
     
+    
+    
+    
     return self;
 }
-
-- (void)updateAccessors {
+- (void)updateAccessors{
+    if (self.name){
+        self.getterName = self.name;
+    }
     
+    self.getterSel = NSSelectorFromString(self.getterName);
 }
+
+
 - (void)setObjcCodeFromType{
     switch (self.type) {
         case ZHPropertyTypeInt:
@@ -83,37 +91,7 @@
 
 }
 
-- (IMP) accessorGetterWith:(EntityProperty *)p
-                      code:(ZHPropertyType)code
-                 className:(NSString *)className{
-    if (code == ZHPropertyTypeArray) {
-        NSString *propName = p.name;
-        
-        return imp_implementationWithBlock(^(Entity *entity){
-            
-            // getter the property
-            typedef id (*getter_type)(Entity *, SEL);
-            getter_type getter = (getter_type)[[self class] instanceMethodForSelector:p.getterSel];
-            id val = getter(entity,p.getterSel);
-            if (!val){
-                val = [[ZHArray alloc] init];
-                // setter the property
-                typedef void (*setter_type)(Entity *, SEL, ZHArray *ar);
-                
-                setter_type setter = (setter_type)[[self class] instanceMethodForSelector:p.setterSel];
-                setter(entity,p.setterSel,val);
-                
-            }
-            
-        });
-        
-        
-        
-    }
-    
-    return nil;
-    
-}
+
 
 - (BOOL)setTypeFromRawType {
     const char *code = _objcRawType.UTF8String;
