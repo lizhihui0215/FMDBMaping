@@ -97,12 +97,12 @@
 }
 
 - (NSArray *)objectArray{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type != %d and type != %d",ZHPropertyTypeObject,ZHPropertyTypeAny];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type == %d and type != %d ",ZHPropertyTypeObject,ZHPropertyTypeAny];
    return  [self.properties filteredArrayUsingPredicate:predicate];
 }
 
 - (NSArray *)sssArray{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type != %d and type != %d",ZHPropertyTypeArray,ZHPropertyTypeAny];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type == %d and type != %d",ZHPropertyTypeArray,ZHPropertyTypeAny];
     return  [self.properties filteredArrayUsingPredicate:predicate];
 }
 

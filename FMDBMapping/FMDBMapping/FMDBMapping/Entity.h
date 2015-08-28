@@ -29,5 +29,7 @@
 
 + (NSString *)tableName;
 
+- (void)save;
+
 
 @end

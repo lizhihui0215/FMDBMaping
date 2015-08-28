@@ -81,11 +81,12 @@
  
     
     // entity sql field
+    [entity save];
     
-    NSMutableDictionary *sqlField = [entity sqlMappingField];
-    
-    
-    NSMutableArray *array = [NSMutableArray array];
+//    NSMutableDictionary *sqlField = [entity sqlMappingField];
+//    
+//    
+//    NSMutableArray *array = [NSMutableArray array];
     
     
 //    NSArray *a =  [self test:sqlField array:array tableName:[entity tableName]];

@@ -70,28 +70,41 @@ static EntityValueTransformer * valueTransformer = nil;
 }
 
 
-- (NSMutableDictionary *)sqlMappingField{
+- (void)save{
 
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         
-    id value = nil;
 
-    for (EntityProperty *property in self.schema.properties) {
-        value = [self valueForKey:property.name];
-        if ([value isKindOfClass:EntityClass]) {
-            value = [value sqlMappingField];
-            [dictionary setObject:value forKey:property.name];
-            continue;
-        }else if (property.type == ZHPropertyTypeArray){
-            value = [self __reverseTransform:value forProperty:property];
-            [dictionary setObject:value forKey:property.name];
-            continue;
-        }else{
-            [dictionary setValue:value forKey:property.name];
-        }
-        
+    
+    
+    NSArray *aaa =  [self.schema objectArray];
+    
+    for (EntityProperty *p in aaa) {
+        Entity *entity = [self valueForKey:p.name];
+        [entity save];
     }
-    return dictionary;
+    
+    NSArray *bbb = [self.schema sssArray];
+    
+    for (EntityProperty *p in bbb) {
+        NSArray *array = [self valueForKey:p.name];
+        for (Entity *entity in array) {
+            [entity save];
+        }
+    }
+
+    id value = nil;
+    for (EntityProperty *property in [self.schema validateSQLFieldProperties]) {
+        value = [self valueForKey:property.name];
+      
+        [dictionary setValue:value forKey:property.name];
+
+    }
+    
+    [[DatabaseManager defaultManager] insertIntoTableWithName:[self tableName] fields:dictionary];
+    
+    NSLog(@"dic %@",dictionary);
+    
 }
 
 -(id)__reverseTransform:(id)value forProperty:(EntityProperty*)property{
@@ -113,19 +126,13 @@ static EntityValueTransformer * valueTransformer = nil;
     return value;
 }
 
-- (void)save{
-    
-    
-    
-    
-}
 
 + (void)load{
     EntityClass = NSClassFromString(NSStringFromClass(self));
 }
 
 - (NSString *)tableName{
-    return NSStringFromClass([self class]);
+    return NSStringFromClass([self superclass]);
 }
 
 @end
