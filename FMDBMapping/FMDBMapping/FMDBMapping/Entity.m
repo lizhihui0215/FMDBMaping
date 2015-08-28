@@ -54,6 +54,7 @@ static EntityValueTransformer * valueTransformer = nil;
     if (self && [Schema sharedSchema]) {
         self.schema = [[self class] sharedSchema];
         NSLog(@"_entitySchema %@",self.schema);
+        object_setClass(self, self.schema.standaloneClass);
     }
     return self;
 }

@@ -60,6 +60,16 @@
         self.getterName = self.name;
     }
     
+    if (!self.setterName){
+        int asciiCode = [self.name characterAtIndex:0];
+        BOOL shouldUppercase = asciiCode >= 'a' && asciiCode <='z';
+        NSString *firstChar = [self.name substringToIndex:1];
+        firstChar = shouldUppercase ? firstChar.uppercaseString : firstChar;
+        self.setterName = [NSString stringWithFormat:@"set%@%@:",firstChar,[self.name substringFromIndex:1]];
+    }
+    
+    self.setterSel = NSSelectorFromString(self.setterName);
+    
     self.getterSel = NSSelectorFromString(self.getterName);
 }
 

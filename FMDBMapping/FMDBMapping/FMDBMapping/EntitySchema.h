@@ -12,9 +12,11 @@
 
 @property(nonatomic, copy) NSString *className;
 
-@property(nonatomic, strong) Class entityClass;
+@property(nonatomic, assign) Class entityClass;
 
-@property(nonatomic, strong) Class accessorClass;
+@property(nonatomic, assign) Class accessorClass;
+
+@property (nonatomic, assign) Class standaloneClass;
 
 @property(nonatomic, strong) NSArray *properties;
 
