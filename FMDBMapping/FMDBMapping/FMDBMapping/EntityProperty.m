@@ -125,7 +125,7 @@
             self.type = ZHPropertyTypeBool;
             return YES;
         case '@':{
-            static const char arrayPrefix[] = "@\"ZHArray<";
+            static const char arrayPrefix[] = "@\"NSArray<";
             static const int arrayPrefixLen = sizeof(arrayPrefix) - 1;
             if (code[1] == '\0'){
                 // string is "@"
@@ -210,6 +210,107 @@
     
     return ignore;
 }
+
+NSString * SQLTypeFrom(ZHPropertyType type){
+    NSString *SQLType;
+    switch (type) {
+        case ZHPropertyTypeBool:
+            SQLType = @"Boolean";
+            break;
+        case ZHPropertyTypeData:
+            SQLType = @"Binary";
+            break;
+        case ZHPropertyTypeDate:
+            SQLType = @"Timestamp";
+            break;
+        case ZHPropertyTypeDouble:
+            SQLType = @"Double";
+            break;
+        case ZHPropertyTypeFloat:
+            SQLType = @"Float";
+            break;
+        case ZHPropertyTypeInt:
+            SQLType = @"Integer";
+            break;
+        case ZHPropertyTypeString:
+            SQLType = @"Text";
+            break;
+        case ZHPropertyTypeAny:
+        case ZHPropertyTypeArray:
+        case ZHPropertyTypeObject:
+            @throw [NSException exceptionWithName:@""
+                                           reason:@"unsupport type for sql field format"
+                                         userInfo:nil];
+            break;
+        default:
+            break;
+    }
+    return SQLType;
+}
+
+
+NSString* SQLDefaultValue(id value, ZHPropertyType type){
+    if (value) return @"";
+    NSString *defaultValue = nil;
+    switch (type) {
+        case ZHPropertyTypeBool:
+        case ZHPropertyTypeDouble:
+        case ZHPropertyTypeFloat:
+        case ZHPropertyTypeInt:
+        case ZHPropertyTypeString:
+            defaultValue = [NSString stringWithFormat:@"default %@",value];
+            break;
+        case ZHPropertyTypeData:{
+            NSString *dataString = [[NSString alloc] initWithData:value encoding:NSUTF8StringEncoding];
+            defaultValue = [NSString stringWithFormat:@"default %@",dataString];
+        }
+            break;
+        case ZHPropertyTypeDate:
+            defaultValue = @"default CURRENT_TIMESTAMP";
+            break;
+      
+        case ZHPropertyTypeAny:
+        case ZHPropertyTypeArray:
+        case ZHPropertyTypeObject:
+            @throw [NSException exceptionWithName:@""
+                                           reason:@"unsupport type for sql field format"
+                                         userInfo:nil];
+            break;
+        default:
+            break;
+    }
+
+    
+    
+    return defaultValue;
+    
+}
+
+
+
+- (NSString *)sqlField{
+    NSString *fieldType = SQLTypeFrom(self.type);
+    NSString *defaultValue = SQLDefaultValue(nil,self.type);
+    NSMutableString *sqlField = [NSMutableString stringWithFormat:@"%@ %@ %@",self.name,fieldType,defaultValue];
+    return sqlField;
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone{
+    EntityProperty *property = [[EntityProperty allocWithZone:zone] init];
+    property.name = self.name;
+    property.type = self.type;
+    property.objcType = self.objcType;
+    property.entityClassName = self.entityClassName;
+    property.indexed = self.indexed;
+    property.getterName = self.getterName;
+    property.setterName = self.setterName;
+    property.getterSel = self.getterSel;
+    property.setterSel = self.setterSel;
+    property.isPrimary = self.isPrimary;
+    property.optional = self.optional;
+    return property;
+}
+
 
 - (NSString *)description
 {

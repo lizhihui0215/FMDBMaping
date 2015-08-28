@@ -19,7 +19,12 @@
 static Class EntityClass = NULL;
 static EntityValueTransformer * valueTransformer = nil;
 @interface Entity ()
+{
+    NSMutableArray *_test;
+}
 @property (nonatomic, strong, readwrite) EntitySchema *schema;
+
+
 @end
 @implementation Entity
 {
@@ -48,6 +53,10 @@ static EntityValueTransformer * valueTransformer = nil;
     return nil;
 }
 
++ (NSString *)tableName{
+    return NSStringFromClass([self class]);
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -55,70 +64,33 @@ static EntityValueTransformer * valueTransformer = nil;
         self.schema = [[self class] sharedSchema];
         NSLog(@"_entitySchema %@",self.schema);
         object_setClass(self, self.schema.standaloneClass);
+        _test = [NSMutableArray array];
     }
     return self;
 }
 
 
-- (NSArray *)sqlMappingField{
-    
-//    for (EntityProperty *property in schema.properties) {
-//        
-//        // get object from ivar using key value coding
-//        value = [entity valueForKey:property.name];
-//        
-//        if (property.type == ZHPropertyTypeObject){
-//            if ([value isKindOfClass:[Entity class]]){
-//                [self addEntity:value];
-//            }
-//            
-//        }else if (property.type == ZHPropertyTypeArray){
-//            [self __reverseTransform:value forProperty:property];
-//        }
-//        
-//        
-//        //TODO: check for custom getter
-//        
-//        // optional
-//        
-//        // ignore
-//        
-//    }
+- (NSMutableDictionary *)sqlMappingField{
+
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    
-    
+        
     id value = nil;
 
-    
-    //TODO: to do mapping
     for (EntityProperty *property in self.schema.properties) {
         value = [self valueForKey:property.name];
-        
         if ([value isKindOfClass:EntityClass]) {
             value = [value sqlMappingField];
             [dictionary setObject:value forKey:property.name];
             continue;
+        }else if (property.type == ZHPropertyTypeArray){
+            value = [self __reverseTransform:value forProperty:property];
+            [dictionary setObject:value forKey:property.name];
+            continue;
         }else{
-            
-            // check built-in transformation
-            if (property.type == ZHPropertyTypeArray) {
-                value = [self __reverseTransform:value forProperty:property];
-                [dictionary setValue:value forKey:property.name];
-                continue;
-            }
-            
-            //TODO: add transforme
-            
-            
-            //
             [dictionary setValue:value forKey:property.name];
-            
         }
         
-        
-        
     }
-    
     return dictionary;
 }
 
@@ -141,25 +113,19 @@ static EntityValueTransformer * valueTransformer = nil;
     return value;
 }
 
+- (void)save{
+    
+    
+    
+    
+}
+
 + (void)load{
     EntityClass = NSClassFromString(NSStringFromClass(self));
 }
 
 - (NSString *)tableName{
     return NSStringFromClass([self class]);
-}
-
-
-+ (void)initialize{
-    static BOOL initialized;
-    if(initialized) return;
-    initialized = YES;
-    
-
-    
-    
-    
-    
 }
 
 @end

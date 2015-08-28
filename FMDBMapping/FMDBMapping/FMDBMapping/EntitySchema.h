@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EntitySchema : NSObject
+@interface EntitySchema : NSObject<NSCopying>
 
 @property(nonatomic, copy) NSString *className;
 
@@ -20,9 +20,15 @@
 
 @property(nonatomic, strong) NSArray *properties;
 
+@property (nonatomic, copy) NSString *tableName;
 + (EntitySchema *)schemaForEntityClass:(Class)pClass;
 
 + (NSArray *)propertiesForClass:(Class)entityClass;
 
+- (NSArray *)validateSQLFieldProperties;
+
+
+- (NSArray *)objectArray;
+- (NSArray *)sssArray;
 
 @end

@@ -15,4 +15,6 @@
 + (Class)classForString:(NSString *)className;
 
 - (id)copyWithZone:(NSZone *)zone;
+
+- (NSArray *)test;
 @end

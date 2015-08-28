@@ -15,7 +15,7 @@ static Schema *s_sharedSchema;
 static NSMutableDictionary *s_localNameToClass;
 static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     while (class1) {
-        if (class1 == class2) return YES;
+        if (class_getSuperclass(class1) == class2) return YES;
         class1 = class_getSuperclass(class1);
     }
     return NO;
@@ -42,9 +42,8 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     if (initialized) return;
     initialized = YES;
     
-    
     NSMutableArray *schemaArray = [NSMutableArray array];
-    
+
     Schema *schema = [[Schema alloc] init];
     
     unsigned int numClasses;
@@ -56,6 +55,7 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
     for (unsigned int i = 0 ; i < numClasses; i++) {
         Class cls = classes[i];
         Class objectBaseClass = [Entity class];
+        
         if (!ZHIsKindOfClass(cls, objectBaseClass)){
             // ingore all other class
             continue;
@@ -84,10 +84,36 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
         // add accesstor
         schema.standaloneClass = [Schema standaloneAccessorWithClass:cls
                                                               schema:schema];
-      
     }
+    schema.objectSchema = schemaArray;
     s_sharedSchema = schema;
+    
+    // generate table
+    
+    NSLog(@"s_sharedSchema %@",s_sharedSchema);
+    
 }
+
+- (NSArray *)test{
+    NSMutableArray *sqlArray = [NSMutableArray array];
+    for (EntitySchema *schema in self.objectSchema) {
+        NSMutableString *sql = [NSMutableString stringWithFormat:@"create table if not exists %@",schema.tableName];
+        NSArray *a  = [schema validateSQLFieldProperties];
+        for (EntityProperty *property in a) {
+            if (property == [a firstObject])[sql appendString:@"( "];
+            [sql appendString:[property  sqlField]];
+            if (property == [a lastObject]) [sql appendString:@" )"]; else [sql appendString:@","];
+        }
+        [sqlArray addObject:sql];
+    }
+    
+    NSLog(@"sqlArray is %@",sqlArray);
+    return sqlArray;
+    
+}
+
+
+
 
 + (Class)standaloneAccessorWithClass:(Class)class schema:(EntitySchema *)schame{
     NSString *className = NSStringFromClass(class);
@@ -109,7 +135,14 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
                 return imp_implementationWithBlock(^(Entity *obj){
                     typedef id (*getter_type)(Entity *,SEL);
                     getter_type supperGetter = (getter_type)[[obj superclass] instanceMethodForSelector:property.getterSel];
-                    return supperGetter(obj,property.getterSel);
+                    id value = supperGetter(obj,property.getterSel);
+                    if (!value){
+                        value = [NSArray array];
+                        typedef void(*setter_type) (Entity *,SEL,NSArray *array);
+                        setter_type superSetter = (setter_type)[[obj superclass] instanceMethodForSelector:property.setterSel];
+                        superSetter(obj,property.setterSel,value);
+                    }
+                    return value;
                 });
             }
             return (IMP) nil;
@@ -124,11 +157,12 @@ static inline BOOL ZHIsKindOfClass(Class class1, Class class2) {
         
         IMP (^setterImplementation)(EntityProperty *property) = ^(EntityProperty *property){
             if (property.type == ZHPropertyTypeArray){
-                return imp_implementationWithBlock(^(Entity *obj,id<NSFastEnumeration>ar){
+                return imp_implementationWithBlock(^(Entity *obj,id<NSFastEnumeration>entity){
                     // make copy when setting (as is the case for all other variants)
-                    ZHArray *array = [[ZHArray alloc] init];
-                    typedef void(*setter_type) (Entity *,SEL,ZHArray *array);
+                    NSMutableArray *array = [NSMutableArray array];
+                    typedef void(*setter_type) (Entity *,SEL,NSMutableArray *array);
                     setter_type superSetter = (setter_type)[[obj superclass] instanceMethodForSelector:property.setterSel];
+                    [array addObject:entity];
                     superSetter(obj,property.setterSel,array);
                 });
             }

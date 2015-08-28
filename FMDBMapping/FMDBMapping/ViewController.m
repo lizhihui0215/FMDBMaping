@@ -22,6 +22,9 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     Dog *dog = [[Dog alloc] init];
+    dog.name = @"i' am dog";
+    
+    
     
     Person *person = [[Person alloc] init];
     person.name = @"name";
@@ -30,12 +33,13 @@
     person.isMan = NO;
     id a = person.dogs ;
     NSInteger b = person.age;
+    person.dogs = dog;
     
     Child *chid = [[Child alloc] init];
     chid.name = @"chid";
     chid.toys = @"a ,b ,b";
     person.chind = chid;
-    
+    person.chind.dog = dog;
     
     NSLog(@"dog %@",dog);
 

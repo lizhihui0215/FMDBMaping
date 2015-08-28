@@ -25,5 +25,9 @@
 
 - (NSString *)tableName;
 
-- (NSDictionary *)sqlMappingField;
+- (NSMutableDictionary *)sqlMappingField;
+
++ (NSString *)tableName;
+
+
 @end

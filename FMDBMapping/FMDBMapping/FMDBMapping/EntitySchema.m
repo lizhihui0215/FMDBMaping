@@ -22,6 +22,7 @@
     schema.className = className;
     schema.entityClass = entityClass;
     schema.accessorClass = [DynamicEntity class];
+    schema.tableName = [entityClass tableName];
     
     // create array of properties, inserting properties of  superclasses first
     
@@ -41,11 +42,6 @@
     
     return schema;
 }
-
-+ (void)replaceAccessorsClass:(Class)class property:(EntityProperty *)property{
-    
-}
-
 
 
 + (NSArray *)propertiesForClass:(Class)entityClass {
@@ -85,8 +81,40 @@
     
     free(properties);
     
-    
     return propertyArray;
+}
+
+- (NSArray *)validateSQLFieldProperties{
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type != %d and type != %d and type != %d",ZHPropertyTypeObject,ZHPropertyTypeArray,ZHPropertyTypeAny];
+//    [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+//        EntityProperty *property = evaluatedObject;
+//
+//    }];
+    
+    
+   NSArray *a = [self.properties filteredArrayUsingPredicate:predicate];
+   return  a;
+}
+
+- (NSArray *)objectArray{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type != %d and type != %d",ZHPropertyTypeObject,ZHPropertyTypeAny];
+   return  [self.properties filteredArrayUsingPredicate:predicate];
+}
+
+- (NSArray *)sssArray{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type != %d and type != %d",ZHPropertyTypeArray,ZHPropertyTypeAny];
+    return  [self.properties filteredArrayUsingPredicate:predicate];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone{
+    EntitySchema *entitySchema = [[EntitySchema allocWithZone:zone] init];
+    entitySchema.entityClass = self.entityClass;
+    entitySchema.className = self.className;
+    entitySchema.accessorClass = self.accessorClass;
+    entitySchema.standaloneClass = self.standaloneClass;
+    entitySchema.properties = [[NSArray allocWithZone:zone] initWithArray:self.properties copyItems:YES];
+    return entitySchema;
+    
 }
 
 - (NSString *)description {

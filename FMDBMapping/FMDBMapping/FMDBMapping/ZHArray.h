@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ZHArray : NSObject
-
+- (instancetype)initWithEntityClassName:(NSString *)entityClassName standalone:(BOOL)standalone;
 @end

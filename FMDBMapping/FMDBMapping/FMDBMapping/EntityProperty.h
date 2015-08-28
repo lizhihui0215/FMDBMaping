@@ -12,7 +12,7 @@
 
 
 
-@interface EntityProperty : NSObject 
+@interface EntityProperty : NSObject<NSCopying>
 @property (nonatomic, readonly, nonnull) NSString *name;
 @property (nonatomic, readonly) ZHPropertyType type;
 
@@ -45,5 +45,5 @@
 - (instancetype)initWithName:(NSString * __nonnull)name
                      indexed:(BOOL)indexed
                     property:(objc_property_t __nonnull)property;
-
+- (NSString *)sqlField;
 @end

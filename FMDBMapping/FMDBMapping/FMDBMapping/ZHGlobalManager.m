@@ -54,49 +54,50 @@
     
 }
 
-- (void)addEntity:(Entity *)entity{
-    EntitySchema *schema = entity.schema;
-    NSString *entityClassName = entity.schema.className;
-    entity.manager = self;
+- (NSArray *)test:(NSMutableDictionary *)dic array:(NSMutableArray *)array tableName:(NSString *)tableName{
     
-    id value = nil;
+    NSMutableDictionary *dictemp = [NSMutableDictionary dictionary];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([obj isKindOfClass:[NSMutableDictionary class]]){
+            [self test:obj array:array tableName:key];
+            [dic removeObjectForKey:key];
+        }else if ([obj isKindOfClass:[NSArray class]]){
+            for (NSMutableDictionary *dicc in obj) {
+                [self test:dicc array:array tableName:key];
+                [dic removeObjectForKey:key];
+            }
+        }else{
+            [dictemp setObject:obj forKey:key];
+        }
+    }];
+    
+    
+    [array addObject:@{tableName : dictemp}];
+    
+    return array;
+}
+
+- (void)addEntity:(Entity *)entity{
+ 
     
     // entity sql field
-    NSDictionary *sqlField = [entity sqlMappingField];
+    
+    NSMutableDictionary *sqlField = [entity sqlMappingField];
+    
+    
+    NSMutableArray *array = [NSMutableArray array];
+    
+    
+//    NSArray *a =  [self test:sqlField array:array tableName:[entity tableName]];
     
     
     
-    // 1
-    @"insert into person values (a,b,c,d)";
     
-    // 2
-    @"insert into dog values (a,b,c,d)";
+//    NSLog(@"array %@",a);
     
-    for (EntityProperty *property in schema.properties) {
-        
-        // get object from ivar using key value coding
-        value = [entity valueForKey:property.name];
-        
-        if (property.type == ZHPropertyTypeObject){
-            if ([value isKindOfClass:[Entity class]]){
-                [self addEntity:value];
-            }
-            
-        }else if (property.type == ZHPropertyTypeArray){
-            [self __reverseTransform:value forProperty:property];
-        }
-        
-        
-        //TODO: check for custom getter
-        
-        // optional
-        
-        // ignore
-        
-        
-        
-        
-    }
+    
+    
+    
     
 //    [self.dbManager insertIntoTableWithName:[entity tableName] fields:@{peoperty.name :value}];
     

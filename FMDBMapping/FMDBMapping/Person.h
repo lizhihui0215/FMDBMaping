@@ -7,10 +7,12 @@
 //
 
 #import "Entity.h"
+@class Dog;
 
 @interface Child : Entity
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSString *toys;
+@property (nonatomic, strong) Dog *dog;
 @end
 
 @protocol Dog <NSObject>
@@ -27,6 +29,9 @@
 @property (nonatomic, assign) NSInteger age;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSDate *birthday;
-@property (nonatomic, strong) ZHArray<Dog> *dogs;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
+@property (nonatomic, strong) NSArray<Dog> *dogs;
+#pragma clang diagnostic pop
 @property (nonatomic, strong) Child *chind;
 @end
